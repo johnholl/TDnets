@@ -5,7 +5,7 @@ import random
 import numpy as np
 
 class Agent:
-    def __init__(self, replay_size=20000):
+    def __init__(self, replay_size=50000):
         self.env = IMaze()
         self.OUTPUT_SIZE = 4
         self.MAX_DEPTH = 10
@@ -14,13 +14,13 @@ class Agent:
 
         # Initialize network
         self.sess = tf.Session()
-        self.input = tf.placeholder(tf.float32, shape=[None, 4])
-        self.l1weights = weight_variable(shape=[4, 10], name='l1weights')
-        self.l1bias = bias_variable(shape=[10], name='l1bias')
-        self.layer1 = tf.nn.relu(tf.matmul(self.input, self.l1weights) + self.l1bias)
+        self.input = tf.placeholder(tf.float32, shape=[None, 4*5])
+        # self.l1weights = weight_variable(shape=[4*5, 100], name='l1weights')
+        # self.l1bias = bias_variable(shape=[100], name='l1bias')
+        # self.layer1 = tf.nn.relu(tf.matmul(self.input, self.l1weights) + self.l1bias)
 
-        self.lstm = tf.nn.rnn_cell.BasicLSTMCell(10, state_is_tuple=True)
-        self.rec_input = tf.reshape(self.layer1, shape=[-1, self.MAX_DEPTH, 10])
+        self.lstm = tf.nn.rnn_cell.BasicLSTMCell(50, state_is_tuple=True)
+        self.rec_input = tf.reshape(self.input, shape=[-1, self.MAX_DEPTH, 4*5])
 
         self.batch_size = tf.placeholder(tf.int32)
         self.in_state = self.lstm.zero_state(batch_size=self.batch_size, dtype=tf.float32)
@@ -31,10 +31,13 @@ class Agent:
         self.final_rec_output = tf.squeeze(tf.slice(self.rec_output, begin=[0,self.MAX_DEPTH-1,0],
                                                     size=[-1, 1, -1]), squeeze_dims=[1])
 
-        self.l2weights = weight_variable(shape=[10, self.OUTPUT_SIZE], name='l2weights')
+        self.rec_output = tf.reshape(self.rec_output, shape=[-1, 50])
+
+        self.l2weights = weight_variable(shape=[50, self.OUTPUT_SIZE], name='l2weights')
         self.l2bias = bias_variable(shape=[self.OUTPUT_SIZE], name='l2bias')
 
-        self.output = tf.matmul(self.final_rec_output, self.l2weights) + self.l2bias
+        self.output = tf.matmul(self.rec_output, self.l2weights) + self.l2bias
+        self.Qvalues = tf.matmul(self.final_rec_output, self.l2weights) + self.l2bias
 
         self.target = tf.placeholder(tf.float32, shape=None)
         self.action_hot = tf.placeholder('float', [None, self.OUTPUT_SIZE])
@@ -50,7 +53,7 @@ class Agent:
 
         self.sess.run(tf.initialize_all_variables())
 
-        self.weights = [self.l1weights, self.l1bias, self.l2weights, self.l2bias]
+        self.weights = [self.l2weights, self.l2bias]
 
     def update_replay_memory(self, tuple):
         self.replay_memory.append(tuple)
@@ -59,14 +62,14 @@ class Agent:
 
 
     def true_step(self, prob, obs_sequence, env):
-        Q_vals = self.sess.run(self.output, feed_dict={self.input: obs_sequence, self.batch_size: 1})
+        Q_vals = self.sess.run(self.Qvalues, feed_dict={self.input: obs_sequence, self.batch_size: 1})
         if random.uniform(0,1) > prob:
             step_action = Q_vals.argmax()
         else:
             step_action = env.sample_action()
 
         if prob > 0.1:
-            prob -= .000018
+            prob -= .0000009
 
         new_obs, step_reward, step_done = env.step(step_action)
 
@@ -79,9 +82,9 @@ class Agent:
         weights = self.sess.run(self.weights)
         layer1_weight_avg = np.average(np.absolute(weights[0]))
         layer1_bias_avg = np.average(np.absolute(weights[1]))
-        layer2_weight_avg = np.average(np.absolute(weights[2]))
-        layer2_bias_avg = np.average(np.absolute(weights[3]))
-        weight_avgs = [layer1_weight_avg, layer1_bias_avg, layer2_weight_avg, layer2_bias_avg]
+        # layer2_weight_avg = np.average(np.absolute(weights[2]))
+        # layer2_bias_avg = np.average(np.absolute(weights[3]))
+        weight_avgs = [layer1_weight_avg, layer1_bias_avg]#, layer2_weight_avg, layer2_bias_avg]
 
         test_env = IMaze()
         total_reward = 0.
@@ -92,16 +95,17 @@ class Agent:
             episode_reward = 0.
             num_steps = 0.
             ep_Q_total = 0.
-            obs_sequence = np.zeros(shape=[10, 4])
+            obs_sequence = np.zeros(shape=[self.MAX_DEPTH, 4, 5])
             obs = test_env.reset()
-            obs = np.expand_dims(obs, axis=0)
             done = False
+
             while not done:
                 # test_env.render()
-                obs_sequence = np.append(obs_sequence, obs, axis=0)
+                obs_sequence = np.append(obs_sequence, [obs], axis=0)
                 obs_sequence = np.delete(obs_sequence, 0, axis=0)
-                _, action, reward, new_obs, Qval, done = self.true_step(0.05, obs_sequence, test_env)
-                obs = np.expand_dims(new_obs, axis=0)
+                _, action, reward, new_obs, Qval, done = \
+                    self.true_step(0.1, obs_sequence.reshape([self.MAX_DEPTH, 20]), test_env)
+                obs = new_obs
                 episode_reward += reward
                 num_steps += 1.
                 ep_Q_total += Qval
@@ -120,3 +124,4 @@ class Agent:
         print("Max reward over 20 episodes: {}".format(max_reward))
 
         return weight_avgs, avg_Q, avg_reward, max_reward, avg_steps
+

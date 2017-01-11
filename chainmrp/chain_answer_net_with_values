@@ -1,0 +1,93 @@
+import tensorflow as tf
+import numpy as np
+from chainmrp.chain_question_net import ChainQuestionNet
+from layer_helpers import weight_variable, bias_variable
+
+class ChainAnswerNet:
+    def __init__(self, obs_dim, max_time=10, load_path=None, replay_size=3000, question_depth=4):
+        self.replay_size = replay_size
+        self.replay_memory = []
+        self.batch_size = tf.placeholder(dtype=tf.int32)
+        self.max_time = max_time
+        self.sess = tf.Session()
+        self.questionnet = ChainQuestionNet(depth=question_depth, obs_dim=obs_dim, sess=self.sess)
+        self.input_size = self.questionnet.obs_dim
+        self.output_size = self.questionnet.output_size # + 1
+
+        self.input = tf.placeholder(dtype=tf.float32, shape=[None, self.max_time, self.input_size])
+        self.rec_layer = tf.nn.rnn_cell.BasicRNNCell(self.output_size)
+        self.in_state = self.rec_layer.zero_state(batch_size=self.batch_size, dtype=tf.float32)
+
+        self.rec_output, self.rec_state = tf.nn.dynamic_rnn(cell=self.rec_layer, inputs=self.input,
+                                                            dtype=tf.float32, initial_state=self.in_state)
+
+
+        #rec_output should have shape [batch size, max time, output size].
+
+        self.final_prediction = tf.squeeze(tf.slice(self.rec_output, begin=(0, self.max_time - 1, 0),
+                                                    size=(-1, 1, -1)), squeeze_dims=[1])
+
+        self.trainable_pred_output = tf.slice(self.rec_output, begin=(0, int(self.max_time / 2), 0), size=(-1, -1, -1))
+        self.pred_targets = tf.placeholder(dtype=tf.float32,
+                                           shape=[None, self.max_time - int(self.max_time/2), self.output_size])
+        self.prediction_loss = tf.reduce_mean(tf.reduce_sum(tf.square(self.trainable_pred_output - self.pred_targets), reduction_indices=[1, 2]))
+
+        self.next_layer = tf.reshape(self.rec_output, shape=[-1, self.output_size])
+        self.l2weights = weight_variable(shape=[self.output_size, 1], name='l2weights')
+        self.l2bias = bias_variable(shape=[1], name='l2bias')
+
+        self.output = tf.reshape(tf.matmul(self.next_layer, self.l2weights), shape=[-1, self.max_time, 1])
+        self.trainable_output = tf.slice(self.output, begin=(0,int(self.max_time/2),0), size=(-1, -1, -1))
+        self.output_targets = tf.placeholder(dtype=tf.float32, shape=[None, self.max_time - int(self.max_time/2), 1])
+        self.output_loss = tf.reduce_mean(tf.reduce_sum(tf.square(self.trainable_output - self.output_targets)))#, reduction_indices=1))
+
+        self.loss = self.output_loss + self.prediction_loss
+
+        # self.valuedif = tf.squeeze(tf.slice(tf.square(self.trainable_output - self.targets),
+        #                                     begin=(0, 0, self.output_size-2), size=(-1, -1, 1)))
+        # self.value_loss = tf.reduce_mean(self.valuedif)
+
+        self.optimizer = tf.train.RMSPropOptimizer(0.00025, decay=0.95, epsilon=0.01)
+
+        # self.optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
+        self.gradients_and_vars = self.optimizer.compute_gradients(self.prediction_loss)
+        self.gradients = [gravar[0] for gravar in self.gradients_and_vars]
+        self.vars = [gravar[1] for gravar in self.gradients_and_vars]
+        self.clipped_gradients = tf.clip_by_global_norm(self.gradients, 1.)[0]
+        self.train_operation = self.optimizer.apply_gradients(zip(self.clipped_gradients, self.vars))
+
+        self.saver = tf.train.Saver()
+
+        if load_path is not None:
+            self.saver.restore(self.sess, save_path=load_path)
+
+        else:
+            self.sess.run(tf.initialize_all_variables())
+
+
+    def prediction_from_obs(self, obs):
+        # from a single observation and prediction produce the next prediction
+        z = np.zeros(shape=[self.max_time-1, self.input_size])
+        full_input = [np.concatenate((z, [obs]), axis=0)]
+        prediction = self.sess.run(self.rec_output, feed_dict={self.input: full_input})
+        return prediction
+
+    def prediction_from_sequence(self, obs_sequence):
+        # obs_sequence should be shaped [max depth, obs size]
+        full_input = [obs_sequence]
+        prediction = self.sess.run(self.rec_output, feed_dict={self.input: full_input})
+        return prediction
+
+    def save_data(self, path):
+        self.saver.save(self.sess, save_path=path)
+        print("Model checkpoint saved.")
+
+    def update_replay_memory(self, example):
+        self.replay_memory.append(example)
+        if len(self.replay_memory) > self.replay_size:
+            self.replay_memory.pop(0)
+
+
+
+
+

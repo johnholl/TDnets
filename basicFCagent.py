@@ -5,19 +5,19 @@ import random
 import numpy as np
 
 class Agent:
-    def __init__(self, replay_size=20000):
+    def __init__(self, replay_size=50000):
         self.env = IMaze()
         self.OUTPUT_SIZE = 4
         self.MAX_DEPTH = 10
-        self.NETWORK_WIDTH = 25
+        self.NETWORK_WIDTH = 100
         self.replay_memory = []
         self.REPLAY_SIZE = replay_size
 
         # Initialize network
         self.sess = tf.Session()
-        self.input = tf.placeholder(tf.float32, shape=[None, 4*self.MAX_DEPTH])
+        self.input = tf.placeholder(tf.float32, shape=[None, self.MAX_DEPTH*4*5])
 
-        self.l1weights = weight_variable(shape=[4*self.MAX_DEPTH, self.NETWORK_WIDTH], name='l1weights')
+        self.l1weights = weight_variable(shape=[self.MAX_DEPTH*4*5, self.NETWORK_WIDTH], name='l1weights')
         self.l1bias = bias_variable(shape=[self.NETWORK_WIDTH], name='l1bias')
         self.layer1 = tf.nn.relu(tf.matmul(self.input, self.l1weights) + self.l1bias)
 
@@ -59,7 +59,7 @@ class Agent:
             step_action = env.sample_action()
 
         if prob > 0.1:
-            prob -= .000018
+            prob -= .0000009
 
         new_obs, step_reward, step_done = env.step(step_action)
 
@@ -74,7 +74,10 @@ class Agent:
         layer1_bias_avg = np.average(np.absolute(weights[1]))
         layer2_weight_avg = np.average(np.absolute(weights[2]))
         layer2_bias_avg = np.average(np.absolute(weights[3]))
-        weight_avgs = [layer1_weight_avg, layer1_bias_avg, layer2_weight_avg, layer2_bias_avg]
+        layer3_weight_avg = np.average(np.absolute(weights[4]))
+        layer3_bias_avg = np.average(np.absolute(weights[5]))
+        weight_avgs = [layer1_weight_avg, layer1_bias_avg, layer2_weight_avg, layer2_bias_avg,
+                       layer3_weight_avg, layer3_bias_avg]
 
         test_env = IMaze()
         total_reward = 0.
@@ -85,23 +88,24 @@ class Agent:
             episode_reward = 0.
             num_steps = 0.
             ep_Q_total = 0.
-            obs_sequence = np.zeros(shape=[4*self.MAX_DEPTH])
+            obs_sequence = np.zeros(shape=[self.MAX_DEPTH, 4, 5])
             obs = test_env.reset()
             done = False
             while not done:
-                test_env.render()
-                obs_sequence = np.append(obs_sequence, obs)
-                obs_sequence = np.delete(obs_sequence, [0,1,2,3], axis=0)
-                feed_dict={self.input: [obs_sequence]}
+                # test_env.render()
+                obs_sequence = np.append(obs_sequence, [obs], axis=0)
+                obs_sequence = np.delete(obs_sequence, [0], axis=0)
+                feed_dict={self.input: [obs_sequence.flatten()]}
                 feed_dict.update(zip(self.weights, weights))
-                Qval = self.sess.run(self.output, feed_dict=feed_dict)
+                Qvals = self.sess.run(self.output, feed_dict=feed_dict)
+                Qval = Qvals.max()
                 if random.uniform(0,1) > .05:
-                    step_action = Qval.argmax()
+                    step_action = Qvals.argmax()
                 else:
                     step_action = test_env.sample_action()
 
                 new_obs, reward, done = test_env.step(step_action)
-                obs = np.expand_dims(new_obs, axis=0)
+                obs = new_obs
                 episode_reward += reward
                 num_steps += 1.
                 ep_Q_total += Qval
