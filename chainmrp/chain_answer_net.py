@@ -1,8 +1,10 @@
-import tensorflow as tf
 import numpy as np
+import tensorflow as tf
 from chainmrp.chain_question_net import ChainQuestionNet, DiscountQuestionNet
 from layer_helpers import weight_variable, bias_variable
-from customrnn_cell import MultilayerRNNCell
+
+from basics.customrnn_cell import MultilayerRNNCell
+
 
 class ChainAnswerNet:
     def __init__(self, obs_dim, max_time=6, depth=4, load_path=None, replay_size=3000, scope=None, softmax=False):

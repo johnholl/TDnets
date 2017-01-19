@@ -1,10 +1,12 @@
-import tensorflow as tf
+import os
+import random
+from time import time
+
 import gym
 import numpy as np
-from layer_helpers import weight_variable, bias_variable
-import random
-import os
-from time import time
+import tensorflow as tf
+
+from basics.layer_helpers import weight_variable, bias_variable
 
 
 class TaxiQNet:

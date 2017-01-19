@@ -1,5 +1,7 @@
 import tensorflow as tf
-from layer_helpers import weight_variable, bias_variable
+
+from basics.layer_helpers import weight_variable, bias_variable
+
 
 class ValueIterator:
     def __init__(self, obs_dim, max_time=4, load_path=None, replay_size=3000):
