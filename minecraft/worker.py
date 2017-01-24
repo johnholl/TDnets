@@ -8,8 +8,8 @@ import sys, signal
 import time
 import os
 from a3c import A3C
-from minecraft.envs import create_minecraft_env
-from lab_interface import LabInterface
+from minecraft.envs import create_minecraft_env, create_env
+# from lab_interface import LabInterface
 import distutils.version
 use_tf12_api = distutils.version.LooseVersion(tf.VERSION) >= distutils.version.LooseVersion('0.12.0')
 import gym_minecraft
@@ -25,7 +25,8 @@ class FastSaver(tf.train.Saver):
                                     meta_graph_suffix, False)
 
 def run(args, server):
-    env = create_minecraft_env("MinecraftEating1-v0")
+    #env = create_minecraft_env("MinecraftEating1-v0")
+    env = create_env("Pong-v3", 1, None)
     trainer = A3C(env, args.task)
 
     # Variable names that start with "local" are not saved in checkpoints.

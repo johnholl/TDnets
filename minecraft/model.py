@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 import tensorflow.contrib.rnn as rnn
+from basics.layer_helpers import weight_variable
 
 def normalized_columns_initializer(std=1.0):
     def _initializer(shape, dtype=None, partition_info=None):
@@ -90,10 +91,13 @@ class LSTMPolicy(object):
 
 
 class AuxLSTMPolicy(object):
-    def __init__(self, ob_space, ac_space, mode=None):
+    def __init__(self, ob_space, ac_space, mode="Grid", replay_size=2000, grid_size=14):
         self.x = x = tf.placeholder(tf.float32, [None] + list(ob_space))
         self.action = tf.placeholder(tf.float32, [None, ac_space])
         self.reward = tf.placeholder(tf.float32, [None, 1])
+        self.replay_memory = []
+        self.replay_size = replay_size
+        self.grid_size = grid_size
 
         x = tf.nn.relu(conv2d(x, 16, "l1", [8, 8], [4, 4]))
         x = conv_features = tf.nn.relu(conv2d(x, 32, "l2", [4, 4], [2, 2]))
@@ -130,6 +134,12 @@ class AuxLSTMPolicy(object):
 
         # Auxiliary branch
         if mode == "Grid":
+            y = linear(x, 32*7*7, 'auxbranch', normalized_columns_initializer(0.1))
+            y = tf.reshape(y, shape=[-1, 7, 7, 32])
+            deconv_weights = weight_variable(shape=[4, 4, ac_space, 32], name='deconvweights')
+            self.predictions = tf.nn.conv2d_transpose(y, deconv_weights,
+                                                      output_shape=[-1, grid_size, grid_size, ac_space],
+                                                      strides=[1,2,2,1], padding='SAME')
 
             pass
 
@@ -155,3 +165,9 @@ class AuxLSTMPolicy(object):
         sess = tf.get_default_session()
         return sess.run(self.vf, {self.x: [ob], self.action: [prev_a], self.reward: [[prev_r]],
                                   self.state_in[0]: c, self.state_in[1]: h})[0]
+
+    def update_replay_memory(self, tuple):
+        # appends tuple and pops old tuple if memory size is exceeded
+        self.replay_memory.append(tuple)
+        if len(self.replay_memory) > self.replay_size:
+            self.replay_memory.pop(0)

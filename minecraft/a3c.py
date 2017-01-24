@@ -7,6 +7,10 @@ import six.moves.queue as queue
 import scipy.signal
 import threading
 import distutils.version
+from basics.pixel_helpers import calculate_intensity_change
+import random
+import sys
+
 use_tf12_api = distutils.version.LooseVersion(tf.VERSION) >= distutils.version.LooseVersion('0.12.0')
 
 def discount(x, gamma):
@@ -133,9 +137,13 @@ runner appends the policy to the queue.
             action, value_, features = fetched[0], fetched[1], fetched[2:]
             # argmax to convert from one-hot
             state, reward, terminal, _ = env.step(action.argmax())
-
+            pix_change = calculate_intensity_change(last_state, state, num_cuts=14)
             # collect the experience
             rollout.add(last_state, action, reward, value_, terminal, last_features, prev_action, [prev_reward])
+            policy.update_replay_memory((last_state, action, reward, terminal,
+                                         last_features, prev_action, [prev_reward],
+                                         pix_change
+                                         ))
             length += 1
             rewards += reward
 
@@ -299,6 +307,28 @@ server.
         }
 
         fetched = sess.run(fetches, feed_dict=feed_dict)
+
+
+        """
+        Grab a minibatch from the replay memory. Set targets and update parameters
+        from the prediction loss function"""
+        if len(self.runner.policy.replay_memory) > 100:
+            pixelbatch = []
+            starting_pos = random.choice(range(len(self.runner.policy.replay_memory)-20))
+            terminal = False
+            bs = 0
+            while not terminal and bs < 20:
+                pixelbatch.append(self.runner.policy.replay_memory[starting_pos + bs])
+                bs += 1
+                terminal = pixelbatch[-1][3]
+
+            last_states = [m[0] for m in pixelbatch]
+            last_actions = [m[5] for m in pixelbatch]
+            last_rewards = [m[6] for m in pixelbatch]
+            pixel_changes = [m[7] for m in pixelbatch]
+            actions = [m[1] for m in pixelbatch]
+            start_features = pixelbatch[0][4]
+
 
         if should_compute_summary:
             self.summary_writer.add_summary(tf.Summary.FromString(fetched[0]), fetched[-1])
