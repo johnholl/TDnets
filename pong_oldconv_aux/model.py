@@ -99,13 +99,11 @@ class AuxLSTMPolicy(object):
         self.replay_size = replay_size
         self.grid_size = grid_size
         self.bs = tf.placeholder(dtype=tf.int32)
-        x = tf.nn.relu(conv2d(x, 16, "l1", [8, 8], [4, 4]))
-        x = conv_features = tf.nn.relu(conv2d(x, 32, "l2", [4, 4], [2, 2]))
-        x = flatten(x)
-        x = tf.nn.relu(linear(x, 256, "l3", normalized_columns_initializer(0.1)))
-        x = tf.concat(concat_dim=1, values=[x, self.action, self.reward])
+        for i in range(4):
+            x = tf.nn.elu(conv2d(x, 32, "l{}".format(i + 1), [3, 3], [2, 2]))
         # introduce a "fake" batch dimension of 1 after flatten so that we can do LSTM over time dim
-        x = tf.expand_dims(x, [0])
+        x = tf.expand_dims(flatten(x), [0])
+        x = tf.concat(concat_dim=1, values=[x, self.action, self.reward])
 
         size = 256
         lstm = rnn.rnn_cell.BasicLSTMCell(size, state_is_tuple=True)
