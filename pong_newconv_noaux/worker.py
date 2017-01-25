@@ -8,7 +8,7 @@ import sys, signal
 import time
 import os
 from a3c import A3C
-from minecraft.envs import create_minecraft_env, create_env
+from pong_newconv_noaux.envs import create_minecraft_env, create_env
 # from lab_interface import LabInterface
 import distutils.version
 use_tf12_api = distutils.version.LooseVersion(tf.VERSION) >= distutils.version.LooseVersion('0.12.0')

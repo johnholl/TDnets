@@ -198,7 +198,7 @@ class AtariRescale42x42(vectorized.ObservationWrapper):
     def _observation(self, observation_n):
         return [_process_frame42(observation) for observation in observation_n]
 
-# adding in minecraft env processing ######################
+# adding in pong_newconv_noaux env processing ######################
 
 def _process_mine84(frame):
     frame_R = frame[:,:,0]

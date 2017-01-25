@@ -98,7 +98,7 @@ class AuxLSTMPolicy(object):
         self.replay_memory = []
         self.replay_size = replay_size
         self.grid_size = grid_size
-
+        self.bs = tf.placeholder(dtype=tf.int32)
         x = tf.nn.relu(conv2d(x, 16, "l1", [8, 8], [4, 4]))
         x = conv_features = tf.nn.relu(conv2d(x, 32, "l2", [4, 4], [2, 2]))
         x = flatten(x)
@@ -138,7 +138,7 @@ class AuxLSTMPolicy(object):
             y = tf.reshape(y, shape=[-1, 7, 7, 32])
             deconv_weights = weight_variable(shape=[4, 4, ac_space, 32], name='deconvweights')
             self.predictions = tf.nn.conv2d_transpose(y, deconv_weights,
-                                                      output_shape=[-1, grid_size, grid_size, ac_space],
+                                                      output_shape=[self.bs, grid_size, grid_size, ac_space],
                                                       strides=[1,2,2,1], padding='SAME')
 
             pass
