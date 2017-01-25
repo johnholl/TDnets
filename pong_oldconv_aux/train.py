@@ -11,7 +11,7 @@ parser.add_argument('-r', '--remotes', default=None,
                          'rewarders to use (e.g. -r vnc://localhost:5900+15900,vnc://localhost:5901+15901).')
 parser.add_argument('-e', '--env-id', type=str, default="PongDeterministic-v3",
                     help="Environment id")
-parser.add_argument('-l', '--log-dir', type=str, default="/tmp/pong",
+parser.add_argument('-l', '--log-dir', type=str, default="/tmp/pong_oldconvaux",
                     help="Log directory path")
 parser.add_argument('-n', '--dry-run', action='store_true',
                     help="Print out commands rather than executing them")
@@ -86,7 +86,7 @@ def create_commands(session, num_workers, remotes, env_id, logdir, shell='bash',
 
 def run():
     args = parser.parse_args()
-    cmds, notes = create_commands("a3c", args.num_workers, args.remotes, args.env_id, args.log_dir, mode=args.mode)
+    cmds, notes = create_commands("a3c_newconvaux", args.num_workers, args.remotes, args.env_id, args.log_dir, mode=args.mode)
     if args.dry_run:
         print("Dry-run mode due to -n flag, otherwise the following commands would be executed:")
     else:

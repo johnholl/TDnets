@@ -2,29 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="261ef8ee-267a-4df8-a7ef-1a35ccb4ab36" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/a3c.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/envs.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/lab_interface.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/play_with_minecraft.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/predictions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/train.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/train_auxpredictor.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_newconv_aux/worker.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_aux/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_aux/a3c.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_aux/envs.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_aux/model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_aux/predictions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_aux/train.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_aux/worker.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_noaux/a3c.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_noaux/envs.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_noaux/model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_noaux/predictions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_noaux/train.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pong_oldconv_noaux/worker.py" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train/checkpoint" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train/graph.pbtxt" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train/model.ckpt-0.data-00000-of-00001" afterPath="" />
@@ -39,8 +16,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train_0/events.out.tfevents.1485193743.Wintermute" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train_0/events.out.tfevents.1485193806.Wintermute" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train_0/events.out.tfevents.1485194022.Wintermute" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pong_newconv_noaux/model.py" afterPath="$PROJECT_DIR$/pong_newconv_noaux/model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pong_oldconv_aux/a3c.py" afterPath="$PROJECT_DIR$/pong_oldconv_aux/a3c.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pong_oldconv_aux/model.py" afterPath="$PROJECT_DIR$/pong_oldconv_aux/model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pong_oldconv_aux/train.py" afterPath="$PROJECT_DIR$/pong_oldconv_aux/train.py" />
     </list>
     <ignored path="TDnets.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,11 +48,47 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="a3c.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="a3c.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/a3c.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="146" column="23" selection-start-line="146" selection-start-column="23" selection-end-line="146" selection-end-column="23" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="train.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="worker.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/worker.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="8" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -95,8 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/chainmrp/value_iterator.py" />
-        <option value="$PROJECT_DIR$/chainmrp/train_value_iterator.py" />
         <option value="$PROJECT_DIR$/chainmrp/train_chain_TDnet_with_values.py" />
         <option value="$PROJECT_DIR$/gridworld.py" />
         <option value="$PROJECT_DIR$/chainmrp/discount_question_net.py" />
@@ -145,6 +157,8 @@
         <option value="$PROJECT_DIR$/pong_newconv_noaux/model.py" />
         <option value="$PROJECT_DIR$/pong_oldconv_noaux/model.py" />
         <option value="$PROJECT_DIR$/pong_newconv_aux/a3c.py" />
+        <option value="$PROJECT_DIR$/pong_oldconv_aux/train.py" />
+        <option value="$PROJECT_DIR$/pong_oldconv_aux/model.py" />
         <option value="$PROJECT_DIR$/pong_oldconv_aux/a3c.py" />
       </list>
     </option>
@@ -198,6 +212,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TDnets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TDnets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pong_oldconv_aux" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -222,24 +250,7 @@
       <recent name="$PROJECT_DIR$/minecraft" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.train (1)">
-    <configuration default="false" name="chain_answer_net" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/chainmrp" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TDnets" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chainmrp/chain_answer_net.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.train (2)">
     <configuration default="false" name="agents" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -253,23 +264,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="TDnets" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/agents.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="train_auxpredictor" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/minecraft" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TDnets" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/minecraft/train_auxpredictor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -304,6 +298,40 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="TDnets" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pong_newconv_noaux/train.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="train (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pong_oldconv_aux" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="TDnets" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pong_oldconv_aux/train.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="a3c" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pong_oldconv_aux" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="TDnets" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pong_oldconv_aux/a3c.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -456,19 +484,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.chain_answer_net" />
-      <item index="1" class="java.lang.String" itemvalue="Python.agents" />
-      <item index="2" class="java.lang.String" itemvalue="Python.train_auxpredictor" />
-      <item index="3" class="java.lang.String" itemvalue="Python.train" />
-      <item index="4" class="java.lang.String" itemvalue="Python.train (1)" />
+      <item index="0" class="java.lang.String" itemvalue="Python.agents" />
+      <item index="1" class="java.lang.String" itemvalue="Python.train" />
+      <item index="2" class="java.lang.String" itemvalue="Python.train (1)" />
+      <item index="3" class="java.lang.String" itemvalue="Python.train (2)" />
+      <item index="4" class="java.lang.String" itemvalue="Python.a3c" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.train (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.train" />
-        <item index="2" class="java.lang.String" itemvalue="Python.agents" />
-        <item index="3" class="java.lang.String" itemvalue="Python.train_auxpredictor" />
-        <item index="4" class="java.lang.String" itemvalue="Python.chain_answer_net" />
+        <item index="0" class="java.lang.String" itemvalue="Python.train (2)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.a3c" />
+        <item index="2" class="java.lang.String" itemvalue="Python.train (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Python.train" />
+        <item index="4" class="java.lang.String" itemvalue="Python.agents" />
       </list>
     </recent_temporary>
   </component>
@@ -480,13 +508,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1366" y="-1056" width="1920" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14232999" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14232999" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28760162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26626018" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26626018" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -527,32 +555,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/chainmrp/chain_question_net.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pong_newconv_noaux/play_with_minecraft.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basics/learning_data.npy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/basics/learning_datalstm.npy">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -789,7 +796,7 @@
         <state relative-caret-position="493">
           <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
           <folding>
-            <element signature="e#22#32#0" expanded="true" />
+            <element signature="e#22#32#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -806,6 +813,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="365" column="4" selection-start-line="365" selection-start-column="4" selection-end-line="365" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -824,7 +832,7 @@
         <state relative-caret-position="715">
           <caret line="226" column="83" selection-start-line="226" selection-start-column="83" selection-end-line="226" selection-end-column="83" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -834,7 +842,7 @@
         <state relative-caret-position="782">
           <caret line="46" column="36" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="36" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -868,7 +876,7 @@
         <state relative-caret-position="420">
           <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -891,11 +899,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/a3c.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="146" column="23" selection-start-line="146" selection-start-column="23" selection-end-line="146" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

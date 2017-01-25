@@ -224,7 +224,11 @@ should be computed.
 
             self.prediction_target = tf.placeholder(tf.float32, [None, grid_size, grid_size])
             self.action = tf.placeholder(tf.float32, [None, env.action_space.n])
-            prediction_readout = tf.reduce_sum(tf.multiply(pi.predictions, self.action), reduction_indices=[3])
+
+            prediction_readout = tf.reduce_sum(
+                tf.transpose(tf.multiply(
+                tf.transpose(pi.predictions, perm=[1,2,0,3]), self.action),
+                perm=[2,0,1,3]), reduction_indices=[3])
 
             self.prediction_loss = pixel_loss_weight*tf.reduce_sum(tf.square(prediction_readout - self.prediction_target))
 
@@ -366,7 +370,10 @@ server.
                                                           self.local_network.action: last_actions,
                                                           self.local_network.reward: last_rewards,
                                                           self.prediction_target: pred_targets,
-                                                          self.action: actions})
+                                                          self.local_network.state_in[0]: start_features[0],
+                                                          self.local_network.state_in[1]: start_features[1],
+                                                          self.action: actions,
+                                                          self.local_network.bs: len(pixelbatch)})
 
 
 
