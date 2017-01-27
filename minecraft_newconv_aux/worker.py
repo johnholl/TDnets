@@ -8,9 +8,11 @@ import sys, signal
 import time
 import os
 from a3c import A3C
-from lab_interface import LabInterface
+from envs import create_minecraft_env, create_env
+# from lab_interface import LabInterface
 import distutils.version
 use_tf12_api = distutils.version.LooseVersion(tf.VERSION) >= distutils.version.LooseVersion('0.12.0')
+import gym_minecraft
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -23,7 +25,8 @@ class FastSaver(tf.train.Saver):
                                     meta_graph_suffix, False)
 
 def run(args, server):
-    env = LabInterface(level='seekavoid_arena_01')
+    #env = create_minecraft_env("MinecraftEating1-v0")
+    env = create_minecraft_env("MinecraftEating1-v0")
     trainer = A3C(env, args.task)
 
     # Variable names that start with "local" are not saved in checkpoints.
@@ -114,8 +117,8 @@ Setting up Tensorflow for data parallel work
     parser.add_argument('-v', '--verbose', action='count', dest='verbosity', default=0, help='Set verbosity.')
     parser.add_argument('--task', default=0, type=int, help='Task index')
     parser.add_argument('--job-name', default="worker", help='worker or ps')
-    parser.add_argument('--num-workers', default=1, type=int, help='Number of workers')
-    parser.add_argument('--log-dir', default="/tmp/pong", help='Log directory path')
+    parser.add_argument('--num-workers', default=1, type=int, help='Numberg of workers')
+    parser.add_argument('--log-dir', default="/tmp/minecraft_newconv_noaux", help='Log directory path')
     parser.add_argument('--env-id', default="PongDeterministic-v3", help='Environment id')
     parser.add_argument('-r', '--remotes', default=None,
                         help='References to environments to create (e.g. -r 20), '

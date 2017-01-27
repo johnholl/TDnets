@@ -7,7 +7,7 @@ import six.moves.queue as queue
 import scipy.signal
 import threading
 import distutils.version
-from basics.pixel_helpers import calculate_intensity_change
+from pixel_helpers import calculate_intensity_change
 import random
 import sys
 

@@ -133,10 +133,10 @@ class AuxLSTMPolicy(object):
     def act(self, ob, prev_a, prev_r, c, h):
         sess = tf.get_default_session()
         return sess.run([self.sample, self.vf] + self.state_out,
-                        {self.x: [ob], self.action: prev_a, self.reward: prev_r,
+                        {self.x: [ob], self.action: [prev_a], self.reward: [[prev_r]],
                         self.state_in[0]: c, self.state_in[1]: h})
 
     def value(self, ob, prev_a, prev_r, c, h):
         sess = tf.get_default_session()
-        return sess.run(self.vf, {self.x: [ob], self.action: prev_a, self.reward: prev_r,
+        return sess.run(self.vf, {self.x: [ob], self.action: [prev_a], self.reward: [[prev_r]],
                                   self.state_in[0]: c, self.state_in[1]: h})[0]
