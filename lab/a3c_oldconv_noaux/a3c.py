@@ -155,6 +155,11 @@ runner appends the policy to the queue.
 
             # timestep_limit = env.spec.tags.get('wrapper_config.TimeLimit.max_episode_steps')
             if terminal:
+                summary = tf.Summary()
+                summary.value.add(tag='episode_reward', simple_value=float(rewards))
+                summary.value.add(tag='reward_per_timestep', simple_value=float(rewards)/float(length))
+                summary_writer.add_summary(summary, policy.global_step.eval())
+                summary_writer.flush()
                 terminal_end = True
                 # if length >= timestep_limit or not env.metadata.get('semantics.autoreset'):
                 last_state = env.reset()
