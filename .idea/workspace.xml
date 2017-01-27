@@ -2,37 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="261ef8ee-267a-4df8-a7ef-1a35ccb4ab36" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_newconv_aux/a3c.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_newconv_aux/lab_interface.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_newconv_aux/worker.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_newconv_noaux/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_newconv_noaux/lab_interface.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_newconv_noaux/model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_newconv_noaux/train.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_newconv_noaux/worker.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_aux/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_aux/a3c.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_aux/lab_interface.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_aux/model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_aux/train.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_aux/worker.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/a3c.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/lab_interface.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/train.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/worker.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/a3c.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/envs.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/layer_helpers.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/pixel_helpers.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/play_with_minecraft.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/predictions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/train.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/train_auxpredictor.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minecraft_oldconv_noaux/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_newconv_noaux/README.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/README.txt" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train/checkpoint" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train/graph.pbtxt" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train/model.ckpt-0.data-00000-of-00001" afterPath="" />
@@ -47,17 +18,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train_0/events.out.tfevents.1485193743.Wintermute" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train_0/events.out.tfevents.1485193806.Wintermute" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train_0/events.out.tfevents.1485194022.Wintermute" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lab/a3c.py" afterPath="$PROJECT_DIR$/lab/a3c_newconv_noaux/a3c.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lab/envs.py" afterPath="$PROJECT_DIR$/lab/a3c_newconv_aux/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lab/lab_interface.py" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/lab_interface.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lab/model.py" afterPath="$PROJECT_DIR$/lab/a3c_newconv_aux/model.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lab/train.py" afterPath="$PROJECT_DIR$/lab/a3c_newconv_aux/train.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lab/worker.py" afterPath="$PROJECT_DIR$/minecraft_newconv_aux/worker.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pong_oldconv_noaux/a3c.py" afterPath="$PROJECT_DIR$/pong_oldconv_noaux/a3c.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pong_oldconv_noaux/model.py" afterPath="$PROJECT_DIR$/pong_oldconv_noaux/model.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pong_oldconv_noaux/worker.py" afterPath="$PROJECT_DIR$/pong_oldconv_noaux/worker.py" />
     </list>
     <ignored path="TDnets.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,20 +37,7 @@
     <favorites_list name="TDnets" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="a3c.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lab/a3c_newconv_aux/a3c.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="368" column="0" selection-start-line="368" selection-start-column="0" selection-end-line="368" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -104,8 +52,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/chainmrp/chain_answer_net_with_values" />
-        <option value="$PROJECT_DIR$/chainmrp/chain_question_net.py" />
         <option value="$PROJECT_DIR$/chainmrp/train_supervised_predictor.py" />
         <option value="$PROJECT_DIR$/chainmrp/train_chain_TDnet.py" />
         <option value="$PROJECT_DIR$/chainmrp/chain_mrp.py" />
@@ -155,6 +101,8 @@
         <option value="$PROJECT_DIR$/minecraft_newconv_aux/model.py" />
         <option value="$PROJECT_DIR$/lab/a3c_newconv_aux/model.py" />
         <option value="$PROJECT_DIR$/lab/a3c_newconv_aux/a3c.py" />
+        <option value="$PROJECT_DIR$/lab/a3c_newconv_noaux/README.txt" />
+        <option value="$PROJECT_DIR$/lab/a3c_oldconv_noaux/README.txt" />
       </list>
     </option>
   </component>
@@ -218,6 +166,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="lab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TDnets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TDnets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="a3c_oldconv_noaux" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -557,20 +523,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/basics/layer_helpers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DeepmindLab/play_with_lab.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pong_newconv_noaux/train_auxpredictor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -927,6 +879,22 @@
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab/a3c_newconv_noaux/README.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_noaux/README.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="64" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
