@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 import tensorflow.contrib.rnn as rnn
+from layer_helpers import weight_variable
 
 def normalized_columns_initializer(std=1.0):
     def _initializer(shape, dtype=None, partition_info=None):
@@ -88,20 +89,22 @@ class LSTMPolicy(object):
         return sess.run(self.vf, {self.x: [ob], self.state_in[0]: c, self.state_in[1]: h})[0]
 
 
-
 class AuxLSTMPolicy(object):
-    def __init__(self, ob_space, ac_space):
+    def __init__(self, ob_space, ac_space, mode="Grid", replay_size=2000, grid_size=14):
         self.x = x = tf.placeholder(tf.float32, [None] + list(ob_space))
         self.action = tf.placeholder(tf.float32, [None, ac_space])
         self.reward = tf.placeholder(tf.float32, [None, 1])
-
-        x = tf.nn.relu(conv2d(x, 16, "l1", [8, 8], [4, 4]))
-        x = conv_features = tf.nn.relu(conv2d(x, 32, "l2", [4, 4], [2, 2]))
-        x = flatten(x)
-        x = tf.nn.relu(linear(x, 256, "l3", normalized_columns_initializer(0.1)))
-        # x = tf.concat(concat_dim=1, values=[x, self.action, self.reward])
+        self.replay_memory = []
+        self.replay_size = replay_size
+        self.grid_size = grid_size
+        self.bs = tf.placeholder(dtype=tf.int32)
+        for i in range(4):
+            x = tf.nn.elu(conv2d(x, 32, "l{}".format(i + 1), [3, 3], [2, 2]))
         # introduce a "fake" batch dimension of 1 after flatten so that we can do LSTM over time dim
+        x = flatten(x)
+        x = tf.concat(concat_dim=1, values=[x, self.action, self.reward])
         x = tf.expand_dims(x, [0])
+
 
         size = 256
         lstm = rnn.rnn_cell.BasicLSTMCell(size, state_is_tuple=True)
@@ -121,10 +124,28 @@ class AuxLSTMPolicy(object):
             time_major=False)
         lstm_c, lstm_h = lstm_state
         x = tf.reshape(lstm_outputs, [-1, size])
+
+        # Actor critic branch
         self.logits = linear(x, ac_space, "action", normalized_columns_initializer(0.01))
         self.vf = tf.reshape(linear(x, 1, "value", normalized_columns_initializer(1.0)), [-1])
         self.state_out = [lstm_c[:1, :], lstm_h[:1, :]]
         self.sample = categorical_sample(self.logits, ac_space)[0, :]
+
+        # Auxiliary branch
+        if mode == "Grid":
+            y = linear(x, 32*7*7, 'auxbranch', normalized_columns_initializer(0.1))
+            y = tf.reshape(y, shape=[-1, 7, 7, 32])
+            deconv_weights = weight_variable(shape=[4, 4, ac_space, 32], name='deconvweights')
+            self.predictions = tf.nn.conv2d_transpose(y, deconv_weights,
+                                                      output_shape=[self.bs, grid_size, grid_size, ac_space],
+                                                      strides=[1,2,2,1], padding='SAME')
+
+            pass
+
+        if mode == "Features":
+
+            pass
+
         self.var_list = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, tf.get_variable_scope().name)
 
     def get_initial_features(self):
@@ -140,4 +161,10 @@ class AuxLSTMPolicy(object):
         sess = tf.get_default_session()
         return sess.run(self.vf, {self.x: [ob], self.action: [prev_a], self.reward: [[prev_r]],
                                   self.state_in[0]: c, self.state_in[1]: h})[0]
+
+    def update_replay_memory(self, tuple):
+        # appends tuple and pops old tuple if memory size is exceeded
+        self.replay_memory.append(tuple)
+        if len(self.replay_memory) > self.replay_size:
+            self.replay_memory.pop(0)
 

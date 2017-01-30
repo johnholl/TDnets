@@ -213,7 +213,8 @@ should be computed.
             entropy = - tf.reduce_sum(prob_tf * log_prob_tf)
 
             bs = tf.to_float(tf.shape(pi.x)[0])
-            self.loss = pi_loss + 0.5 * vf_loss - entropy * 0.01
+            entropy_reg = 10.**(np.random.uniform(-3.30103,-2.))
+            self.loss = pi_loss + vf_loss - entropy * entropy_reg
 
             # 20 represents the number of "local steps":  the number of timesteps
             # we run the policy before we update the parameters.
@@ -253,7 +254,8 @@ should be computed.
             inc_step = self.global_step.assign_add(tf.shape(pi.x)[0])
 
             # each worker has a different set of adam optimizer parameters
-            opt = tf.train.AdamOptimizer(1e-4)
+            thread_lr = 10.**(np.random.uniform(-4, -2.30103))
+            opt = tf.train.RMSPropOptimizer(thread_lr)
             self.train_op = tf.group(opt.apply_gradients(grads_and_vars), inc_step)
             self.summary_writer = None
             self.local_steps = 0

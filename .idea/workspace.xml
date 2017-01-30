@@ -2,6 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="261ef8ee-267a-4df8-a7ef-1a35ccb4ab36" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atari_with_aux/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atari_with_aux/a3c.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atari_with_aux/envs.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atari_with_aux/layer_helpers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atari_with_aux/model.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atari_with_aux/pixel_helpers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atari_with_aux/train.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atari_with_aux/worker.py" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train/checkpoint" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train/graph.pbtxt" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train/model.ckpt-0.data-00000-of-00001" afterPath="" />
@@ -17,9 +25,13 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train_0/events.out.tfevents.1485193806.Wintermute" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/minecraft/~/tmp/pong/train_0/events.out.tfevents.1485194022.Wintermute" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/a3c_newconv_aux/lab_interface.py" afterPath="$PROJECT_DIR$/lab/a3c_newconv_aux/lab_interface.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/a3c_newconv_noaux/a3c.py" afterPath="$PROJECT_DIR$/lab/a3c_newconv_noaux/a3c.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/a3c_newconv_noaux/lab_interface.py" afterPath="$PROJECT_DIR$/lab/a3c_newconv_noaux/lab_interface.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/a3c_oldconv_aux/lab_interface.py" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_aux/lab_interface.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/a3c.py" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/a3c.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/train.py" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/train.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/lab_interface.py" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/lab_interface.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/model.py" afterPath="$PROJECT_DIR$/lab/a3c_oldconv_noaux/model.py" />
     </list>
     <ignored path="TDnets.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,45 +51,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="a3c.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab/a3c_newconv_noaux/a3c.py">
+      <file leaf-file-name="a3c.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/atari_with_aux/a3c.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="167" selection-end-column="21" />
+            <state relative-caret-position="85">
+              <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="envs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/atari_with_aux/envs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="637">
+              <caret line="277" column="0" selection-start-line="277" selection-start-column="0" selection-end-line="277" selection-end-column="0" />
               <folding>
-                <element signature="e#0#37#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/atari_with_aux/model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="125" column="9" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="a3c.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_noaux/a3c.py">
+        <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/a3c.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="168" column="27" selection-start-line="168" selection-start-column="27" selection-end-line="168" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="worker.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_noaux/worker.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="train.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_noaux/train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="75" selection-start-line="18" selection-start-column="75" selection-end-line="18" selection-end-column="75" />
+            <state relative-caret-position="852">
+              <caret line="386" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="386" selection-end-column="0" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#0#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,16 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/chainmrp/chain_mrp.py" />
-        <option value="$PROJECT_DIR$/customrnn_cell.py" />
-        <option value="$PROJECT_DIR$/chainmrp/chain_answer_net.py" />
-        <option value="$PROJECT_DIR$/chainmrp/train_discount_chain_TDnet.py" />
-        <option value="$PROJECT_DIR$/chainmrp/exercise_answer_network.py" />
-        <option value="$PROJECT_DIR$/chainmrp/train_recurrent_agent.py" />
-        <option value="$PROJECT_DIR$/taxi/taxi_TDnet.py" />
-        <option value="$PROJECT_DIR$/taxi/train_taxi_Qnet.py" />
-        <option value="$PROJECT_DIR$/taxi/play_with_taxi.py" />
-        <option value="$PROJECT_DIR$/minecraft/predictions.py" />
         <option value="$PROJECT_DIR$/minecraft/processing.py" />
         <option value="$PROJECT_DIR$/minecraft/play_with_minecraft.py" />
         <option value="$PROJECT_DIR$/minecraft/agents.py" />
@@ -146,9 +150,19 @@
         <option value="$PROJECT_DIR$/lab/a3c_newconv_aux/a3c.py" />
         <option value="$PROJECT_DIR$/lab/a3c_newconv_noaux/README.txt" />
         <option value="$PROJECT_DIR$/lab/a3c_oldconv_noaux/README.txt" />
-        <option value="$PROJECT_DIR$/lab/a3c_newconv_noaux/a3c.py" />
-        <option value="$PROJECT_DIR$/lab/a3c_oldconv_noaux/a3c.py" />
         <option value="$PROJECT_DIR$/lab/a3c_oldconv_noaux/train.py" />
+        <option value="$PROJECT_DIR$/lab/a3c_oldconv_noaux/lab_interface.py" />
+        <option value="$PROJECT_DIR$/lab/a3c_oldconv_noaux/a3c.py" />
+        <option value="$PROJECT_DIR$/lab/a3c_oldconv_noaux/model.py" />
+        <option value="$PROJECT_DIR$/lab/a3c_newconv_noaux/a3c.py" />
+        <option value="$PROJECT_DIR$/lab/a3c_newconv_noaux/lab_interface.py" />
+        <option value="$PROJECT_DIR$/lab/a3c_oldconv_aux/lab_interface.py" />
+        <option value="$PROJECT_DIR$/lab/a3c_newconv_aux/lab_interface.py" />
+        <option value="$PROJECT_DIR$/atari_with_aux/envs.py" />
+        <option value="$PROJECT_DIR$/atari_with_aux/worker.py" />
+        <option value="$PROJECT_DIR$/atari_with_aux/train.py" />
+        <option value="$PROJECT_DIR$/atari_with_aux/model.py" />
+        <option value="$PROJECT_DIR$/atari_with_aux/a3c.py" />
       </list>
     </option>
   </component>
@@ -184,74 +198,7 @@
     </navigator>
     <panes>
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TDnets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TDnets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TDnets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TDnets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TDnets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TDnets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TDnets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="a3c_oldconv_noaux" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TDnets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TDnets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="a3c_newconv_noaux" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
       <pane id="Scratches" />
     </panes>
@@ -263,11 +210,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/atari_with_aux" />
       <recent name="$PROJECT_DIR$/lab" />
       <recent name="$PROJECT_DIR$/lab/a3c_newconv_noaux" />
       <recent name="$PROJECT_DIR$/minecraft_newconv_aux" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/pong_oldconv_noaux" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lab/a3c_newconv_noaux" />
@@ -537,7 +484,7 @@
     <frame x="1366" y="-4" width="1920" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23668951" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23668951" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886904" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28760162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -587,76 +534,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pong_newconv_noaux/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmEdu20/system/python_stubs/-1247972723/cv2/__init__.py" />
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/gym/core.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="375" column="27" selection-start-line="375" selection-start-column="27" selection-end-line="375" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/universe/vectorized/core.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="42" column="46" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmEdu20/system/python_stubs/-1247972723/numpy/core/multiarray.py" />
-    <entry file="file://$PROJECT_DIR$/color_img.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/question_networks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-107">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pong_newconv_noaux/worker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/agents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1802">
-          <caret line="114" column="88" selection-start-line="114" selection-start-column="62" selection-end-line="114" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/math_ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="365" column="4" selection-start-line="365" selection-start-column="4" selection-end-line="365" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pong_newconv_noaux/envs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pong_newconv_noaux/a3c.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="715">
@@ -713,13 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/a3c.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -731,13 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="36" column="9" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -814,16 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lab/a3c_newconv_noaux/lab_interface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#28#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lab/train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -851,16 +704,6 @@
     <entry file="file://$PROJECT_DIR$/lab/a3c_newconv_noaux/model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_noaux/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1117">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="false" />
@@ -929,26 +772,8 @@
         <state relative-caret-position="-238">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
-            <element signature="e#22#37#0" expanded="true" />
+            <element signature="e#22#37#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab/a3c_newconv_noaux/a3c.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="167" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_noaux/a3c.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="168" column="27" selection-start-line="168" selection-start-column="27" selection-end-line="168" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -965,8 +790,174 @@
         <state relative-caret-position="306">
           <caret line="18" column="75" selection-start-line="18" selection-start-column="75" selection-end-line="18" selection-end-column="75" />
           <folding>
+            <element signature="e#0#15#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/rnn_cell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="388" column="24" selection-start-line="388" selection-start-column="24" selection-end-line="388" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab/a3c_newconv_noaux/a3c.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="264" column="44" selection-start-line="264" selection-start-column="44" selection-end-line="264" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_noaux/a3c.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="258" column="12" selection-start-line="258" selection-start-column="12" selection-end-line="259" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_noaux/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1658">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_noaux/lab_interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab/a3c_newconv_aux/lab_interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="72" selection-start-line="8" selection-start-column="72" selection-end-line="8" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab/a3c_newconv_noaux/lab_interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab/a3c_oldconv_aux/lab_interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="23" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/atari_with_aux/envs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="277" column="0" selection-start-line="277" selection-start-column="0" selection-end-line="277" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/atari_with_aux/worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/atari_with_aux/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/atari_with_aux/pixel_helpers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/atari_with_aux/layer_helpers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pong_newconv_aux/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/atari_with_aux/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="125" column="9" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pong_oldconv_aux/a3c.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="852">
+          <caret line="386" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="386" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/atari_with_aux/a3c.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>

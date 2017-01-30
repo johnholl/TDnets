@@ -1,12 +1,15 @@
 from __future__ import print_function
-import distutils.version
-import scipy.signal
-import threading
 from collections import namedtuple
 import numpy as np
-import six.moves.queue as queue
 import tensorflow as tf
-from model import AuxLSTMPolicy, LSTMPolicy
+from model import LSTMPolicy, AuxLSTMPolicy
+import six.moves.queue as queue
+import scipy.signal
+import threading
+import distutils.version
+from basics.pixel_helpers import calculate_intensity_change
+import random
+import sys
 
 use_tf12_api = distutils.version.LooseVersion(tf.VERSION) >= distutils.version.LooseVersion('0.12.0')
 
@@ -123,23 +126,24 @@ runner appends the policy to the queue.
     length = 0
     rewards = 0
     prev_reward = 0
-    prev_action = np.zeros(shape=[env.num_actions])
+    prev_action = np.zeros(shape=[env.action_space.n])
 
     while True:
         terminal_end = False
         rollout = PartialRollout()
 
         for _ in range(num_local_steps):
-            # print(np.shape([[prev_reward]]))
-            # print(np.shape(last_features[0]))
-            # print(np.shape(last_features[1]))
-            fetched = policy.act(last_state, *last_features)
+            fetched = policy.act(last_state, prev_action, prev_reward, *last_features)
             action, value_, features = fetched[0], fetched[1], fetched[2:]
             # argmax to convert from one-hot
-            state, reward, terminal = env.step(action.argmax())
-
+            state, reward, terminal, info = env.step(action.argmax())
+            pix_change = calculate_intensity_change(last_state, state, num_cuts=14)
             # collect the experience
             rollout.add(last_state, action, reward, value_, terminal, last_features, prev_action, [prev_reward])
+            policy.update_replay_memory((last_state, action, reward, terminal,
+                                         last_features, prev_action, [prev_reward],
+                                         pix_change, state
+                                         ))
             length += 1
             rewards += reward
 
@@ -148,21 +152,18 @@ runner appends the policy to the queue.
             last_state = state
             last_features = features
 
-
-            summary = tf.Summary()
-            summary_writer.add_summary(summary, policy.global_step.eval())
-            summary_writer.flush()
-
-            # timestep_limit = env.spec.tags.get('wrapper_config.TimeLimit.max_episode_steps')
-            if terminal:
+            if info:
                 summary = tf.Summary()
-                summary.value.add(tag='episode_reward', simple_value=float(rewards))
-                summary.value.add(tag='reward_per_timestep', simple_value=float(rewards)/float(length))
+                for k, v in info.items():
+                    summary.value.add(tag=k, simple_value=float(v))
                 summary_writer.add_summary(summary, policy.global_step.eval())
                 summary_writer.flush()
+
+            timestep_limit = env.spec.tags.get('wrapper_config.TimeLimit.max_episode_steps')
+            if terminal:
                 terminal_end = True
-                # if length >= timestep_limit or not env.metadata.get('semantics.autoreset'):
-                last_state = env.reset()
+                if length >= timestep_limit or not env.metadata.get('semantics.autoreset'):
+                    last_state = env.reset()
                 last_features = policy.get_initial_features()
                 print("Episode finished. Sum of rewards: %d. Length: %d" % (rewards, length))
                 length = 0
@@ -170,13 +171,13 @@ runner appends the policy to the queue.
                 break
 
         if not terminal_end:
-            rollout.r = policy.value(last_state, *last_features)
+            rollout.r = policy.value(last_state, prev_action, prev_reward, *last_features)
 
         # once we have enough experience, yield it, and have the ThreadRunner place it on a queue
         yield rollout
 
 class A3C(object):
-    def __init__(self, env, task):
+    def __init__(self, env, task, grid_size=14):
         """
 An implementation of the A3C algorithm that is reasonably well-tuned for the VNC environments.
 Below, we will have a modest amount of complexity due to the way TensorFlow handles data parallelism.
@@ -186,19 +187,20 @@ should be computed.
 
         self.env = env
         self.task = task
+        self.grid_size = grid_size
         worker_device = "/job:worker/task:{}/cpu:0".format(task)
         with tf.device(tf.train.replica_device_setter(1, worker_device=worker_device)):
             with tf.variable_scope("global"):
-                self.network = LSTMPolicy(env.observation_space_shape, env.num_actions)
+                self.network = AuxLSTMPolicy(env.observation_space.shape, env.action_space.n)
                 self.global_step = tf.get_variable("global_step", [], tf.int32, initializer=tf.constant_initializer(0, dtype=tf.int32),
                                                    trainable=False)
 
         with tf.device(worker_device):
             with tf.variable_scope("local"):
-                self.local_network = pi = LSTMPolicy(env.observation_space_shape, env.num_actions)
+                self.local_network = pi = AuxLSTMPolicy(env.observation_space.shape, env.action_space.n)
                 pi.global_step = self.global_step
 
-            self.ac = tf.placeholder(tf.float32, [None, env.num_actions], name="ac")
+            self.ac = tf.placeholder(tf.float32, [None, env.action_space.n], name="ac")
             self.adv = tf.placeholder(tf.float32, [None], name="adv")
             self.r = tf.placeholder(tf.float32, [None], name="r")
 
@@ -211,12 +213,25 @@ should be computed.
             pi_loss = - tf.reduce_sum(tf.reduce_sum(log_prob_tf * self.ac, [1]) * self.adv)
 
             # loss of value function
-            vf_loss = .5 * tf.reduce_sum(tf.square(pi.vf - self.r))
+            vf_loss = 0.5 * tf.reduce_sum(tf.square(pi.vf - self.r))
             entropy = - tf.reduce_sum(prob_tf * log_prob_tf)
 
             bs = tf.to_float(tf.shape(pi.x)[0])
-            entropy_reg = 10.**(np.random.uniform(-3.30103,-2.))
-            self.loss = pi_loss + vf_loss - entropy * entropy_reg
+            self.agent_loss = pi_loss + 0.5 * vf_loss - entropy * 0.01
+
+            # additionally define prediction loss
+            pixel_loss_weight = 10**(np.random.uniform(-4., -2.))
+
+            self.prediction_target = tf.placeholder(tf.float32, [None, grid_size, grid_size])
+            self.action = tf.placeholder(tf.float32, [None, env.action_space.n])
+
+            prediction_readout = tf.reduce_sum(
+                tf.transpose(tf.multiply(
+                tf.transpose(pi.predictions, perm=[1,2,0,3]), self.action),
+                perm=[2,0,1,3]), reduction_indices=[3])
+
+            self.prediction_loss = pixel_loss_weight*tf.reduce_sum(tf.square(prediction_readout - self.prediction_target))
+
 
             # 20 represents the number of "local steps":  the number of timesteps
             # we run the policy before we update the parameters.
@@ -227,15 +242,16 @@ should be computed.
             self.runner = RunnerThread(env, pi, 20)
 
 
-            grads = tf.gradients(self.loss, pi.var_list)
+            agent_grads = tf.gradients(self.agent_loss, pi.var_list)
+            prediction_grads = tf.gradients(self.prediction_loss, pi.var_list)
 
             if use_tf12_api:
                 tf.summary.scalar("model/policy_loss", pi_loss / bs)
                 tf.summary.scalar("model/value_loss", vf_loss / bs)
                 tf.summary.scalar("model/entropy", entropy / bs)
                 tf.summary.image("model/state", pi.x)
-                tf.summary.scalar("model/grad_global_norm", tf.global_norm(grads))
-                tf.summary.scalar("model/var_global_norm", tf.global_norm(pi.var_list))
+                tf.summary.scalar("model/grad_global_norm", tf.global_norm(agent_grads))
+                # tf.summary.scalar("model/var_global_norm", tf.global_norm(pi.var_list))
                 self.summary_op = tf.summary.merge_all()
 
             else:
@@ -243,22 +259,24 @@ should be computed.
                 tf.scalar_summary("model/value_loss", vf_loss / bs)
                 tf.scalar_summary("model/entropy", entropy / bs)
                 tf.image_summary("model/state", pi.x)
-                tf.scalar_summary("model/grad_global_norm", tf.global_norm(grads))
-                tf.scalar_summary("model/var_global_norm", tf.global_norm(pi.var_list))
+                tf.scalar_summary("model/grad_global_norm", tf.global_norm(agent_grads))
+                # tf.scalar_summary("model/var_global_norm", tf.global_norm(pi.var_list))
                 self.summary_op = tf.merge_all_summaries()
 
-            grads, _ = tf.clip_by_global_norm(grads, 40.0)
+            agent_grads, _ = tf.clip_by_global_norm(agent_grads, 40.0)
+            prediction_grads, _ = tf.clip_by_global_norm(prediction_grads, 40.0)
 
             # copy weights from the parameter server to the local model
             self.sync = tf.group(*[v1.assign(v2) for v1, v2 in zip(pi.var_list, self.network.var_list)])
 
-            grads_and_vars = list(zip(grads, self.network.var_list))
+            agent_grads_and_vars = list(zip(agent_grads, self.network.var_list))
+            prediction_grads_and_vars = list(zip(prediction_grads, self.network.var_list))
             inc_step = self.global_step.assign_add(tf.shape(pi.x)[0])
 
             # each worker has a different set of adam optimizer parameters
-            thread_lr = 10.**(np.random.uniform(-4, -2.30103))
-            opt = tf.train.RMSPropOptimizer(thread_lr)
-            self.train_op = tf.group(opt.apply_gradients(grads_and_vars), inc_step)
+            opt = tf.train.AdamOptimizer(1e-4)
+            self.agent_train_op = tf.group(opt.apply_gradients(agent_grads_and_vars), inc_step)
+            self.prediction_train_op = opt.apply_gradients(prediction_grads_and_vars)
             self.summary_writer = None
             self.local_steps = 0
 
@@ -292,12 +310,14 @@ server.
         should_compute_summary = self.task == 0 and self.local_steps % 11 == 0
 
         if should_compute_summary:
-            fetches = [self.summary_op, self.train_op, self.global_step]
+            fetches = [self.summary_op, self.agent_train_op, self.global_step]
         else:
-            fetches = [self.train_op, self.global_step]
+            fetches = [self.agent_train_op, self.global_step]
 
         feed_dict = {
             self.local_network.x: batch.si,
+            self.local_network.action: batch.pa,
+            self.local_network.reward: batch.pr,
             self.ac: batch.a,
             self.adv: batch.adv,
             self.r: batch.r,
@@ -306,6 +326,59 @@ server.
         }
 
         fetched = sess.run(fetches, feed_dict=feed_dict)
+
+
+        """
+        Grab a minibatch from the replay memory. Set targets and update parameters
+        from the prediction loss function"""
+        if len(self.runner.policy.replay_memory) > 100:
+            pixelbatch = []
+            starting_pos = random.choice(range(len(self.runner.policy.replay_memory)-20))
+            terminal = False
+            bs = 0
+            while not terminal and bs < 20:
+                pixelbatch.append(self.runner.policy.replay_memory[starting_pos + bs])
+                bs += 1
+                terminal = pixelbatch[-1][3]
+
+            last_states = [m[0] for m in pixelbatch]
+            last_actions = [m[5] for m in pixelbatch]
+            last_rewards = [m[6] for m in pixelbatch]
+            rewards = [m[2] for m in pixelbatch]
+            pixel_changes = [m[7] for m in pixelbatch]
+            actions = [m[1] for m in pixelbatch]
+            start_features = pixelbatch[0][4]
+            states = [m[8] for m in pixelbatch]
+
+            prediction_values = sess.run(self.local_network.predictions,
+                                        feed_dict={self.local_network.x: states,
+                                                   self.local_network.action: actions,
+                                                   self.local_network.reward: np.expand_dims(rewards, axis=1),
+                                                   self.local_network.state_in[0]: start_features[0],
+                                                   self.local_network.state_in[1]: start_features[1],
+                                                   self.local_network.bs: len(pixelbatch)
+                                        })
+            max_prediction_value = np.max(prediction_values, axis=3)[-1]
+
+            pred_targets = []
+            for i in range(len(pixelbatch)):
+                pred_targets.append(np.sum(pixel_changes[i:], axis=0))
+                if not pixelbatch[-1][3]:
+                    pred_targets[-1] += max_prediction_value
+
+            sess.run(self.prediction_train_op, feed_dict={self.local_network.x: last_states,
+                                                          self.local_network.action: last_actions,
+                                                          self.local_network.reward: last_rewards,
+                                                          self.prediction_target: pred_targets,
+                                                          self.local_network.state_in[0]: start_features[0],
+                                                          self.local_network.state_in[1]: start_features[1],
+                                                          self.action: actions,
+                                                          self.local_network.bs: len(pixelbatch)})
+
+
+
+
+
 
         if should_compute_summary:
             self.summary_writer.add_summary(tf.Summary.FromString(fetched[0]), fetched[-1])
